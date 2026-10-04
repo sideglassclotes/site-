@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SideGlass – Same court, different mentality</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#17181a;--bg2:#222426;--ink:#eeedea;--mute:#a1a3a5;--panel:#f6f6f6;--line:#3a3c3e;--hot:#f2ff3a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 Barlow,system-ui,sans-serif}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--hot);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-style:italic;font-weight:800;line-height:.92;margin:0}
+.drop{background:var(--hot);color:#111;padding:12px 24px}
+.drop .in{max-width:1100px;margin:0 auto;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.drop strong{font:800 italic 24px 'Barlow Condensed',sans-serif}
+.drop form{display:flex;gap:8px;flex:1;min-width:260px;max-width:460px}
+.drop input{flex:1;min-width:0;padding:10px 12px;border:2px solid #111;background:#fff;font:500 16px Barlow,sans-serif;border-radius:2px}
+.drop button{background:#111;color:var(--hot);border:0;padding:10px 18px;font:600 16px Barlow,sans-serif;border-radius:2px;cursor:pointer}
+.drop .ok{font-weight:600;width:100%;margin:0}
+header{display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto;padding:16px 24px}
+header img{height:32px;width:auto}
+nav{display:flex;gap:26px;align-items:center;font-weight:600}
+nav a{text-decoration:none}
+.cartbtn{background:none;border:1.5px solid var(--ink);color:var(--ink);font:600 15px Barlow,sans-serif;padding:8px 16px;border-radius:2px;cursor:pointer}
+.hero{padding:48px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(56px,9vw,120px);margin-bottom:20px}
+.hero p{color:var(--mute);max-width:32ch;font-size:20px;margin:0 0 28px}
+.btn{display:inline-block;background:var(--ink);color:#111;font:600 17px Barlow,sans-serif;text-decoration:none;padding:14px 28px;border:0;border-radius:2px;cursor:pointer}
+.btn:hover{background:#fff}
+.btn.hot{background:var(--hot)}
+.pic{background:var(--panel);padding:28px;display:flex;justify-content:center;position:relative}
+.pic img{max-height:520px;width:auto}
+.toggle{position:absolute;left:14px;bottom:14px;display:flex;gap:6px}
+.toggle button{border:1.5px solid #111;background:transparent;color:#111;font:600 14px Barlow,sans-serif;padding:6px 14px;border-radius:2px;cursor:pointer}
+.toggle button[aria-pressed=true]{background:#111;color:#fff}
+.prod{padding:72px 0;background:var(--bg2)}
+.prod .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+.prod h2{font-size:clamp(44px,6vw,72px);margin-bottom:10px}
+.price{font:800 italic 36px 'Barlow Condensed',sans-serif;margin:6px 0 16px}
+.prod ul{padding-left:18px;color:var(--mute);margin:0 0 22px}
+.sizes{display:flex;gap:8px;margin:0 0 22px;flex-wrap:wrap}
+.sizes button{min-width:50px;padding:10px 0;background:none;border:1.5px solid var(--line);color:var(--ink);font:600 15px Barlow,sans-serif;border-radius:2px;cursor:pointer}
+.sizes button[aria-pressed=true]{background:var(--ink);color:#111;border-color:var(--ink)}
+.about{padding:88px 0}
+.about h2{font-size:clamp(44px,6vw,76px);margin-bottom:20px}
+.about p{max-width:50ch;color:var(--mute);font-size:19px;margin:0}
+.slogan{background:var(--hot);color:#111;padding:64px 24px;text-align:center}
+.slogan h2{font-size:clamp(40px,8vw,104px)}
+footer{padding:36px 24px;text-align:center;color:var(--mute);font-size:14px}
+footer img{height:24px;width:auto;margin:0 auto 10px}
+#drawer{position:fixed;top:0;right:0;height:100%;width:min(430px,100%);background:var(--bg2);border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s;z-index:20;display:flex;flex-direction:column;padding:24px;overflow:auto;padding-top:calc(24px + env(safe-area-inset-top,0px));padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+#drawer.open{transform:none}
+#drawer h3{font-size:34px;display:flex;justify-content:space-between;align-items:center}
+#drawer h3 button{background:none;border:0;color:var(--ink);font-size:32px;cursor:pointer;font-style:normal}
+.row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.row small{color:var(--mute);display:block}
+.row button{background:none;border:0;color:var(--mute);text-decoration:underline;font:inherit;font-size:14px;padding:0;cursor:pointer}
+.total{display:flex;justify-content:space-between;font-weight:600;font-size:20px;margin:14px 0}
+#co label{display:block;font-size:14px;color:var(--mute);margin-top:10px}
+#co input,#co select{width:100%;padding:10px;margin-top:4px;background:var(--bg);border:1.5px solid var(--line);color:var(--ink);font:16px Barlow,sans-serif;border-radius:2px}
+#co .two{display:grid;grid-template-columns:1fr 1.4fr;gap:10px}
+#co .btn{width:100%;margin-top:18px}
+.note{color:var(--mute);font-size:13px;margin:10px 0 0}
+#msg{margin:12px 0 0;font-weight:600}
+@media(max-width:820px){.hero .wrap,.prod .wrap{grid-template-columns:1fr;gap:28px}nav a{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}#drawer{transition:none}}
+</style>
+</head>
+<body>
+<div class="drop"><div class="in">
+  <strong>Novo drop a caminho. Sê o primeiro a saber.</strong>
+  <form id="news"><input type="email" name="email" placeholder="O teu email" aria-label="Email para novos drops" required><button>Quero receber</button></form>
+  <p class="ok" id="newsmsg" role="status" hidden></p>
+  <small style="width:100%;opacity:.75">Usamos o teu email só para te avisar dos drops. Podes sair da lista quando quiseres.</small>
+</div></div>
+
+<header>
+  <img src="logo.png" alt="SideGlass">
+  <nav><a href="#hoodie">Hoodie</a><a href="#sobre">Sobre nós</a><button class="cartbtn" id="open">Carrinho (<span id="count">0</span>)</button></nav>
+</header>
+
+<main>
+<section class="hero"><div class="wrap">
+  <div>
+    <h1>Same court, different mentality.</h1>
+    <p>Roupa feita para dar estilo a quem joga padel.</p>
+    <a class="btn hot" href="#hoodie">Ver o hoodie</a>
+  </div>
+  <div class="pic"><img src="costas.png" alt="Hoodie SideGlass preto com duas raquetes e o logótipo nas costas"></div>
+</div></section>
+
+<section class="prod" id="hoodie"><div class="wrap">
+  <div class="pic">
+    <img id="hoodimg" src="frente.png" alt="Hoodie SideGlass, frente">
+    <div class="toggle" role="group" aria-label="Vista">
+      <button aria-pressed="true" data-v="f">Frente</button><button aria-pressed="false" data-v="b">Costas</button>
+    </div>
+  </div>
+  <div>
+    <h2>Hoodie SideGlass</h2>
+    <div class="price">69 €</div>
+    <ul><li>Preto, com capuz e bolso canguru</li><li>Frente: estrela branca no peito</li><li>Costas: raquetes e logótipo SideGlass</li></ul>
+    <div class="sizes" role="group" aria-label="Tamanho">
+      <button aria-pressed="false">S</button><button aria-pressed="true">M</button><button aria-pressed="false">L</button><button aria-pressed="false">XL</button>
+    </div>
+    <button class="btn hot" id="add">Adicionar ao carrinho</button>
+  </div>
+</div></section>
+
+<section class="about" id="sobre"><div class="wrap">
+  <h2>Sobre nós</h2>
+  <p>Somos uma marca de roupa que pretende dar estilo aos jogadores de padel.</p>
+</div></section>
+
+<section class="slogan"><h2>Same court, different mentality.</h2></section>
+</main>
+
+<footer><img src="logo.png" alt="SideGlass"><div>© 2026 SideGlass</div></footer>
+
+<aside id="drawer" aria-label="Carrinho" aria-hidden="true">
+  <h3>Carrinho <button id="close" aria-label="Fechar carrinho">×</button></h3>
+  <div id="items"></div>
+  <div class="total"><span>Total</span><span id="total">0 €</span></div>
+  <form id="co">
+    <label>Nome<input name="nome" required autocomplete="name"></label>
+    <label>Email<input type="email" name="email" required autocomplete="email"></label>
+    <label>Telemóvel<input type="tel" name="telemovel" required autocomplete="tel"></label>
+    <label>Morada<input name="morada" required autocomplete="street-address"></label>
+    <div class="two"><label>Código postal<input name="codigo_postal" required autocomplete="postal-code"></label><label>Cidade<input name="cidade" required autocomplete="address-level2"></label></div>
+    <label>Forma de pagamento
+      <select name="pagamento" required><option>MB WAY</option><option>Transferência bancária</option><option>Pagamento na entrega</option></select>
+    </label>
+    <button class="btn hot" type="submit">Finalizar encomenda</button>
+    <p class="note">Não pedimos dados de cartão. Depois de enviares, recebes um email com as instruções de pagamento.</p>
+    <p id="msg" role="status"></p>
+  </form>
+</aside>
+
+<script>
+const FORM='https://formspree.io/f/xjygbjrv';
+const IMG={f:'frente.png',b:'costas.png'};
+const $=s=>document.querySelector(s),cart=[],drawer=$('#drawer');
+function send(data){return fetch(FORM,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)}).then(r=>{if(!r.ok)throw 0})}
+function setOpen(o){drawer.classList.toggle('open',o);drawer.setAttribute('aria-hidden',!o);if(o)$('#close').focus()}
+const total=()=>cart.reduce((n,i)=>n+i.qty*i.price,0);
+function render(){
+  $('#count').textContent=cart.reduce((n,i)=>n+i.qty,0);$('#total').textContent=total()+' €';
+  $('#items').innerHTML=cart.length?'':'<p style="color:var(--mute)">O carrinho está vazio.</p>';
+  cart.forEach((i,k)=>{const r=document.createElement('div');r.className='row';
+    r.innerHTML=`<div><strong>${i.name}</strong><small>Tamanho ${i.size} · ${i.qty} × ${i.price} €</small><button type="button">Remover</button></div><div>${i.qty*i.price} €</div>`;
+    r.querySelector('button').onclick=()=>{cart.splice(k,1);render()};$('#items').appendChild(r)});
+}
+document.querySelectorAll('[aria-pressed]').forEach(b=>b.onclick=()=>{
+  b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  if(b.dataset.v){$('#hoodimg').src=IMG[b.dataset.v];$('#hoodimg').alt='Hoodie SideGlass, '+(b.dataset.v==='f'?'frente':'costas')}
+});
+$('#add').onclick=()=>{
+  const size=document.querySelector('.sizes [aria-pressed=true]').textContent;
+  const f=cart.find(i=>i.size===size);f?f.qty++:cart.push({name:'Hoodie SideGlass',price:69,size,qty:1});
+  render();setOpen(true)};
+$('#open').onclick=()=>setOpen(true);$('#close').onclick=()=>setOpen(false);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+const APPS='https://script.google.com/macros/s/AKfycbzs_sTHIu8F1fpZ_sRU_GG8O8E2WF4oiH2Zb2aMfinJ186rTV8LHGEb1LY2MDXoa304EA/exec';
+$('#news').onsubmit=e=>{e.preventDefault();const m=$('#newsmsg');m.hidden=false;m.textContent='A enviar…';
+  fetch(APPS,{method:'POST',mode:'no-cors',body:new URLSearchParams({email:e.target.email.value})})
+   .then(()=>{m.textContent='Feito. Vais receber um email de confirmação.';e.target.hidden=true})
+   .catch(()=>m.textContent='Não foi possível enviar. Tenta de novo.')};
+$('#co').onsubmit=e=>{e.preventDefault();const m=$('#msg');
+  if(!cart.length){m.textContent='Adiciona primeiro um hoodie ao carrinho.';return}
+  m.textContent='A enviar…';const d=Object.fromEntries(new FormData(e.target));
+  d._subject='Nova encomenda SideGlass – '+d.nome;d.tipo='encomenda';
+  d.artigos=cart.map(i=>`${i.qty}× ${i.name} (tamanho ${i.size})`).join('; ');d.total=total()+' €';
+  send(d).then(()=>{m.textContent='Encomenda enviada. Vais receber um email com as instruções de pagamento.';cart.length=0;render();e.target.reset()})
+   .catch(()=>m.textContent='Não foi possível enviar. Tenta de novo.')};
+render();
+</script>
+</body>
+</html>

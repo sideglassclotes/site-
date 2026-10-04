@@ -144,9 +144,15 @@ footer img{height:24px;width:auto;margin:0 auto 10px}
 
 <script>
 const FORM='https://formspree.io/f/xjygbjrv';
+const APPS='https://script.google.com/macros/s/AKfycbzs_sTHIu8F1fpZ_sRU_GG8O8E2WF4oiH2Zb2aMfinJ186rTV8LHGEb1LY2MDXoa304EA/exec';
 const IMG={f:'frente.png',b:'costas.png'};
 const $=s=>document.querySelector(s),cart=[],drawer=$('#drawer');
-function send(data){return fetch(FORM,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)}).then(r=>{if(!r.ok)throw 0})}
+function send(data){
+  // cópia de segurança no Formspree (podes apagar esta linha depois de testares)
+  fetch(FORM,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)}).catch(()=>{});
+  // registo na folha Google
+  return fetch(APPS,{method:'POST',mode:'no-cors',body:new URLSearchParams(data)});
+}
 function setOpen(o){drawer.classList.toggle('open',o);drawer.setAttribute('aria-hidden',!o);if(o)$('#close').focus()}
 const total=()=>cart.reduce((n,i)=>n+i.qty*i.price,0);
 function render(){
@@ -166,7 +172,6 @@ $('#add').onclick=()=>{
   render();setOpen(true)};
 $('#open').onclick=()=>setOpen(true);$('#close').onclick=()=>setOpen(false);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
-const APPS='https://script.google.com/macros/s/AKfycbzs_sTHIu8F1fpZ_sRU_GG8O8E2WF4oiH2Zb2aMfinJ186rTV8LHGEb1LY2MDXoa304EA/exec';
 $('#news').onsubmit=e=>{e.preventDefault();const m=$('#newsmsg');m.hidden=false;m.textContent='A enviar…';
   fetch(APPS,{method:'POST',mode:'no-cors',body:new URLSearchParams({email:e.target.email.value})})
    .then(()=>{m.textContent='Feito. Vais receber um email de confirmação.';e.target.hidden=true})
